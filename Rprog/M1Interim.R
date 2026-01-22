@@ -12,15 +12,15 @@ library(rnaturalearthdata)
 library(rnaturalearth)
 
 
-setwd("C:/Users/umeha/OneDrive - Kyoto University/修士論文")
-
 theme_1 <- theme_bw() +
-  theme(text = element_text(size = 14),
-        axis.text.x = element_text(angle = 45, size = 12, hjust = 1, vjust = 1),
+  theme(text = element_text(size = 16),
+        axis.text.x = element_text(angle = 45, size = 16, hjust = 1, vjust = 1),
         axis.title.x = element_blank(),
         legend.position = "right", 
         #legend.title = element_blank(),
         strip.background = element_blank())
+
+setwd("data")
 
 
 # ghgc --------------------------------------------------------------------
@@ -107,12 +107,21 @@ g2 <- ggplot(df2, aes(x = Year, group = criteria)) +
 
 plot(g2)
 
-folder_path <- "C:/Users/umeha/OneDrive - Kyoto University/修士論文/R"
-name <- "ghgc_new.png"
-full_path <- file.path(folder_path, name)
-ggsave(full_path, plot = g2, width = 12, height = 6.5, units = "in", dpi = 300, bg = "white" )  
+output_dir <- file.path("..", "output")
+if (!dir.exists(output_dir)) {
+  dir.create(output_dir)
+}
+name <- "ghgc.png"
 
-
+ggsave(
+  filename = file.path(output_dir, name),
+  plot = g2,
+  width = 12,
+  height = 6.5,
+  units = "in",
+  dpi = 300,
+  bg = "white"
+)
 # CO2FFIND or GHGT_IMP ----------------------------------------------------------------
 
 
@@ -175,12 +184,17 @@ g2 <- df1 %>%
 plot(g2)
 
 
-folder_path <- "C:/Users/umeha/OneDrive - Kyoto University/修士論文/R"
 name <- "CO2FFIND.png"
-full_path <- file.path(folder_path, name)
-ggsave(full_path, plot = g2, width = 12, height = 6.5, units = "in", dpi = 300, bg = "white" )  
 
-
+ggsave(
+  filename = file.path(output_dir, name),
+  plot = g2,
+  width = 12,
+  height = 6.5,
+  units = "in",
+  dpi = 300,
+  bg = "white"
+)
 # GHGT_IMP ----------------------------------------------------------------
 
 
@@ -243,12 +257,18 @@ g2 <- df1 %>%
 plot(g2)
 
 
-folder_path <- "C:/Users/umeha/OneDrive - Kyoto University/修士論文/R"
 name <- "GHGT_IMP.png"
-full_path <- file.path(folder_path, name)
-ggsave(full_path, plot = g2, width = 12, height = 6.5, units = "in", dpi = 300, bg = "white" )  
 
 
+ggsave(
+  filename = file.path(output_dir, name),
+  plot = g2,
+  width = 12,
+  height = 6.5,
+  units = "in",
+  dpi = 300,
+  bg = "white"
+)
 # Financial terms ---------------------------------------------------------
 
 
@@ -351,13 +371,17 @@ g_time <- ggplot(df_new1) +
 
 print(g_time)
 
-folder_path <- "C:/Users/umeha/OneDrive - Kyoto University/修士論文/R"
 name <- "FT_by_ET.png"
-full_path <- file.path(folder_path, name)
-ggsave(full_path, plot = g_time, width = 12, height = 16, units = "in", dpi = 300, bg = "white" )  
 
-
-
+ggsave(
+  filename = file.path(output_dir, name),
+  plot = g_time,
+  width = 12,
+  height = 16,
+  units = "in",
+  dpi = 300,
+  bg = "white"
+)
 # Cum CO2 -----------------------------------------------------------------
 
 year <- 2100
@@ -409,13 +433,18 @@ g4 <- ggplot(data = all_data) +
 print(g4)
 
 
-folder_path <- "C:/Users/umeha/OneDrive - Kyoto University/修士論文/R"
 name <- "CumCO2.png"
-full_path <- file.path(folder_path, name)
-ggsave(full_path, plot = g4, width = 14, height = 6.5, units = "in", dpi = 300, bg = "white" )  
 
 
-
+ggsave(
+  filename = file.path(output_dir, name),
+  plot = g4,
+  width = 14,
+  height = 6.5,
+  units = "in",
+  dpi = 300,
+  bg = "white"
+)
 # Temperature -----------------------------------------------------------------
 
 year <- 2100
@@ -469,13 +498,19 @@ g4 <- ggplot(data = all_data) +
 print(g4)
 
 
-folder_path <- "C:/Users/umeha/OneDrive - Kyoto University/修士論文/R"
 name <- "Tem.png"
-full_path <- file.path(folder_path, name)
-ggsave(full_path, plot = g4, width = 14, height = 6.5, units = "in", dpi = 300, bg = "white" )  
 
 
 
+ggsave(
+  filename = file.path(output_dir, name),
+  plot = g4,
+  width = 14,
+  height = 6.5,
+  units = "in",
+  dpi = 300,
+  bg = "white"
+)
 
 # check IAMC----------------------------------------------------------------
 
@@ -546,13 +581,18 @@ g1 <- df1 %>%
 plot(g1)
 
 
-folder_path <- "C:/Users/umeha/OneDrive - Kyoto University/修士論文/R"
 name  <- paste0(thema, ".png")
-full_path <- file.path(folder_path, name)
-ggsave(full_path, plot = g1, width = 11, height = 6.5, units = "in", dpi = 300, bg = "white" )  
 
 
-
+ggsave(
+  filename = file.path(output_dir, name),
+  plot = g1,
+  width = 11,
+  height = 6.5,
+  units = "in",
+  dpi = 300,
+  bg = "white"
+)
 # CDR_time ----------------------------------------------------------------
 
 
@@ -631,10 +671,18 @@ g_time <- ggplot(all_data) +
 
 print(g_time)
 
-folder_path <- "C:/Users/umeha/OneDrive - Kyoto University/修士論文/R"
 name <- "CDR.png"
-full_path <- file.path(folder_path, name)
-ggsave(full_path, plot = g_time, width = 11, height = 6.5, units = "in", dpi = 300, bg = "white" )  
+
+
+ggsave(
+  filename = file.path(output_dir, name),
+  plot = g_time,
+  width = 11,
+  height = 6.5,
+  units = "in",
+  dpi = 300,
+  bg = "white"
+)
 
 # Car Rem -----------------------------------------------------------------
 
@@ -721,11 +769,18 @@ g4 <- ggplot(data = all_data) +
 print(g4)
 
 
-folder_path <- "C:/Users/umeha/OneDrive - Kyoto University/修士論文/R"
 name <- "CDR2100.png"
-full_path <- file.path(folder_path, name)
-ggsave(full_path, plot = g4, width = 12, height = 6.5, units = "in", dpi = 300, bg = "white" )  
 
+
+ggsave(
+  filename = file.path(output_dir, name),
+  plot = g4,
+  width = 12,
+  height = 6.5,
+  units = "in",
+  dpi = 300,
+  bg = "white"
+)
 
 # Primary energy  ---------------------------------------------------------
 
@@ -813,10 +868,18 @@ g2 <- ggplot(data = df5) +
 
 plot(g2)
 
-folder_path <- "C:/Users/umeha/OneDrive - Kyoto University/修士論文/R"
 name <- "Ene_1st.png"
-full_path <- file.path(folder_path, name)
-ggsave(full_path, plot = g2, width = 14, height = 6.5, units = "in", dpi = 300, bg = "white" )  
+
+
+ggsave(
+  filename = file.path(output_dir, name),
+  plot = g2,
+  width = 14,
+  height = 6.5,
+  units = "in",
+  dpi = 300,
+  bg = "white"
+)
 
 # Power generation --------------------------------------------------------
 
@@ -898,10 +961,18 @@ g3 <- ggplot(data = df_all) +
 
 plot(g3)
 
-folder_path <- "C:/Users/umeha/OneDrive - Kyoto University/修士論文/R"
 name <- "Ene_2nd.png"
-full_path <- file.path(folder_path, name)
-ggsave(full_path, plot = g3, width = 14, height = 6.5, units = "in", dpi = 300, bg = "white" )  
+
+
+ggsave(
+  filename = file.path(output_dir, name),
+  plot = g3,
+  width = 14,
+  height = 6.5,
+  units = "in",
+  dpi = 300,
+  bg = "white"
+)
 
 # Final energy source -----------------------------------------------------
 
@@ -1011,12 +1082,17 @@ g4 <- ggplot(data = all_data) +
 print(g4)
 
 
-folder_path <- "C:/Users/umeha/OneDrive - Kyoto University/修士論文/R"
 name <- "Ene_3dr.png"
-full_path <- file.path(folder_path, name)
-ggsave(full_path, plot = g4, width = 14, height = 6.5, units = "in", dpi = 300, bg = "white" )  
 
-
+ggsave(
+  filename = file.path(output_dir, name),
+  plot = g4,
+  width = 14,
+  height = 6.5,
+  units = "in",
+  dpi = 300,
+  bg = "white"
+)
 # Energy3 -----------------------------------------------------------------
 
 
@@ -1048,10 +1124,15 @@ g <- ggdraw() +
 
 plot(g)
 
-folder_path <- "C:/Users/umeha/OneDrive - Kyoto University/修士論文/R"
 name <- "Ene_combine.png"
-full_path <- file.path(folder_path, name)
-ggsave(full_path, plot = g, width = 12, height = 10, units = "in", dpi = 300, bg = "white" )  
 
-
+ggsave(
+  filename = file.path(output_dir, name),
+  plot = g,
+  width = 12,
+  height = 10,
+  units = "in",
+  dpi = 300,
+  bg = "white"
+)
 
